@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "venture",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,10 +16,13 @@
     "@vendure/asset-server-plugin": "1.6.2",
     "@vendure/core": "1.6.2",
     "@vendure/email-plugin": "1.6.2",
+    "@vendure/testing": "^1.6.2",
+    "@vendure/ui-devkit": "^1.6.2",
     "better-sqlite3": "7.5.3",
     "typescript": "4.3.5"
   },
   "devDependencies": {
+    "@types/jest": "^28.1.0",
     "concurrently": "7.2.1",
     "ts-node": "10.8.0"
   }
