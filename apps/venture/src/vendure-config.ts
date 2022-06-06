@@ -3,6 +3,8 @@ import {
 	DefaultJobQueuePlugin,
 	DefaultSearchPlugin,
 	VendureConfig,
+	Asset,
+	LanguageCode,
 } from '@vendure/core';
 import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
@@ -48,7 +50,87 @@ export const config: VendureConfig = {
 	paymentOptions: {
 		paymentMethodHandlers: [dummyPaymentHandler],
 	},
-	customFields: {},
+	customFields: {
+		Channel: [
+			{
+				name: 'displayName',
+				label: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Store Display Name',
+					},
+				],
+				type: 'string',
+			},
+			{
+				name: 'logo',
+				label: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Logo',
+					},
+				],
+				type: 'relation',
+				entity: Asset,
+				eager: true,
+			},
+			{
+				name: 'subdomain',
+				label: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Subdomain',
+					},
+				],
+				type: 'string',
+			},
+			{
+				name: 'deployedUrl',
+				label: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Deployed Url',
+					},
+				],
+				type: 'string',
+			},
+			{
+				name: 'primaryColor',
+				label: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Primary Color',
+					},
+				],
+				type: 'string',
+				pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$',
+				description: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Hex value of the primary color i.e. #ff0000. Google "hex color picker" to find a hex value.',
+					},
+				],
+				length: 7,
+			},
+			{
+				name: 'secondaryColor',
+				label: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Secondary Color',
+					},
+				],
+				type: 'string',
+				pattern: '^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$',
+				description: [
+					{
+						languageCode: LanguageCode.en,
+						value: 'Hex value of the secondary color i.e. #ff0000. Google "hex color picker" to find a hex value.',
+					},
+				],
+			},
+		],
+	},
 	plugins: [
 		AssetServerPlugin.init({
 			route: 'assets',
