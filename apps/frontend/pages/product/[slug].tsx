@@ -7,16 +7,17 @@ import { useRouter } from 'next/router'
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { ProductView } from '@components/product'
-
 export async function getStaticProps({
   params,
   locale,
   locales,
   preview,
 }: GetStaticPropsContext<{ slug: string }>) {
+  console.log(params, locale, locales, preview)
   const config = { locale, locales }
   const pagesPromise = commerce.getAllPages({ config, preview })
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
+
   const productPromise = commerce.getProduct({
     variables: { slug: params!.slug },
     config,

@@ -10,7 +10,7 @@ import { defaultEmailHandlers, EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import path from 'path';
-// import { ExamplePlugin } from './plugins/example/plugin';
+import { ExamplePlugin } from './plugins/example/plugin';
 import { compileUiExtensions } from '@vendure/ui-devkit/compiler';
 import { RestPlugin } from './plugins/rest/rest.plugin';
 
@@ -157,16 +157,16 @@ export const config: VendureConfig = {
 					'http://localhost:8080/verify-email-address-change',
 			},
 		}),
-		// AdminUiPlugin.init({
-		// 	route: 'admin',
-		// 	port: 3002,
-		// 	app: compileUiExtensions({
-		// 		outputPath: path.join(__dirname, '../admin-ui'),
-		// 		extensions: [ExamplePlugin.uiExtensions],
-		// 		devMode: true,
-		// 	}),
-		// }),
-		// ExamplePlugin.init({}),
+		AdminUiPlugin.init({
+			route: 'admin',
+			port: 3002,
+			app: compileUiExtensions({
+				outputPath: path.join(__dirname, '../admin-ui'),
+				extensions: [ExamplePlugin.uiExtensions],
+				devMode: true,
+			}),
+		}),
+		ExamplePlugin.init({}),
 		RestPlugin,
 	],
 };
