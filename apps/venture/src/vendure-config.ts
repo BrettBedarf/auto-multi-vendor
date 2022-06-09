@@ -1,3 +1,4 @@
+import { MultiStore } from './plugins/multi-store/store';
 import {
 	dummyPaymentHandler,
 	DefaultJobQueuePlugin,
@@ -168,5 +169,6 @@ export const config: VendureConfig = {
 		}),
 		ExamplePlugin.init({}),
 		RestPlugin,
+		MultiStore,
 	],
 };
