@@ -14,7 +14,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "incremental": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "inlineSourceMap": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

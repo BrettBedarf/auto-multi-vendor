@@ -32,9 +32,27 @@ export const fetcher: Fetcher = async ({
       'The Vendure Shop API url has not been provided. Please define NEXT_PUBLIC_VENDURE_SHOP_API_URL in .env.local'
     )
   }
+  // add vendure channel token to headers
+  const channelToken = process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN
+  if (!channelToken) {
+    debugger
+
+    throw new Error(
+      'The Vendure Channel token has not been provided. Please define NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN in .env.local or production environment variables'
+    )
+  }
+
   const hasBody = Boolean(variables || query)
+
   const body = hasBody ? JSON.stringify({ query, variables }) : undefined
-  const headers = hasBody ? { 'Content-Type': 'application/json' } : undefined
+  const baseHeaders: Record<string, string> = hasBody
+    ? { 'Content-Type': 'application/json' }
+    : {}
+
+  const headers: HeadersInit = {
+    ...baseHeaders,
+    ...{ 'vendure-token': channelToken },
+  }
   const res = await fetch(shopApiUrl, {
     method,
     body,

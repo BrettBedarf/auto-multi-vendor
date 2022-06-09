@@ -5,7 +5,7 @@ const channelData = fetch('http://localhost:3000/channels', {
 }).json()
 
 const channel = channelData.find((c) => {
-  return c.token === process.env.VENDURE_CHANNEL_TOKEN
+  return c.token === process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN
 })
 
 const {
@@ -15,7 +15,7 @@ const {
 const colorOverrides = {}
 if (primaryColor) colorOverrides.primary = primaryColor
 if (secondaryColor) colorOverrides.secondary = secondaryColor
-console.log(colorOverrides)
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',

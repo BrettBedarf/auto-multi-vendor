@@ -5,7 +5,7 @@
   "scripts": {
     "release": "taskr release",
     "build": "taskr build",
-    "dev": "taskr",
+    "dev": "rm -r dist/* && tsc --watch",
     "types": "tsc --emitDeclarationOnly",
     "prettier-fix": "prettier --write .",
     "generate": "graphql-codegen"

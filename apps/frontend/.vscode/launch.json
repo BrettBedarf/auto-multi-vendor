@@ -24,19 +24,25 @@
          "request": "launch",
          "type": "chrome",
          "url": "http://localhost:8001",
-         "webRoot": "${workspaceFolder}/apps/frontend"
+         "webRoot": "${workspaceFolder}"
       },
 {
       "name": "Next.js: debug full stack",
       "type": "node-terminal",
       "request": "launch",
-      "command": "cd ./apps/frontend && yarn dev",
+      "command": "yarn dev",
       "serverReadyAction": {
         "pattern": "started server on .+, url: (https?://.+)",
         "uriFormat": "%s",
         "action": "debugWithChrome",
-        "webRoot": "${workspaceFolder}/apps/frontend"
+        "webRoot": "${workspaceFolder}"
       }
-    }
+    },
+       {
+      "name": "Next.js: debug server-side",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev"
+    },
    ]
 }

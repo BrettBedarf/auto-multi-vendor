@@ -95,7 +95,17 @@ function withCommerceConfig(nextConfig = {}) {
           jsconfigPaths.paths['@framework/*'] = [`${distPath}/*`]
         }
       }
-
+      // add source map loader plugin to map existing source maps from modules
+      cfg.module.rules.push({
+        test: /\.js$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      })
+      if (Array.isArray(cfg.ignoreWarnings)) {
+        cfg.ignoreWarnings.push(/Failed to parse source map/)
+      } else {
+        cfg.ignoreWarnings = [/Failed to parse source map/]
+      }
       return webpack ? webpack(cfg, options) : cfg
     }
   }
