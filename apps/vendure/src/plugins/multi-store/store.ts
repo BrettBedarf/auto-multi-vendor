@@ -33,12 +33,18 @@ export class MultiStore implements OnApplicationBootstrap {
 						'Missing GIT_REPO environment variable! Cannot create new frontend deployment without it.'
 					);
 				}
+				const channelRestUrl = process.env.NEXT_PUBLIC_VENDURE_CHANNEL_REST_URL;
+				if (!channelRestUrl) {
+					throw new Error('Missing NEXT_PUBLIC_VENDURE_CHANNEL_REST_URL environment variable! Cannot create new frontend deployment without it')
+				}
+
 				const deployResult = await deploy({
 					storeName: event.entity.code,
 					subdomain: event.entity.customFields.subdomain,
 					channelToken: event.entity.token,
 					apiUrl,
 					gitRepo,
+					channelRestUrl
 				});
 				console.log(deployResult);
 			});
