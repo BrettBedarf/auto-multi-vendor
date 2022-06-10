@@ -5,10 +5,10 @@
    "scripts": {
       "run:server": "ts-node ./src/index.ts",
       "run:worker": "ts-node ./src/index-worker.ts",
-      "dev:server": "nodemon -V ./src/index.ts",
-      "dev:worker": "nodemon ./src/index-worker.ts",
+      "dev:server": "export NODE_ENV=DEV && nodemon -V ./src/index.ts",
+      "dev:worker": "export NODE_ENV=DEV && nodemon ./src/index-worker.ts",
       "start": "concurrently yarn:run:*",
-      "dev": "export NODE_ENV=DEV && concurrently yarn:dev:*",
+      "dev": "concurrently yarn:dev:*",
       "build": "tsc",
       "migration:generate": "ts-node migration generate",
       "migration:run": "ts-node migration run",
