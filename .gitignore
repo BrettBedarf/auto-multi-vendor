@@ -208,3 +208,4 @@ dist
 # apps/venture/vendure.sqlite
 # apps/venture/vendure.sqlite-shm
 # apps/venture/vendure.sqlite-wal
+apps/vendure/admin-ui
