@@ -15,7 +15,7 @@ module.exports = withCommerceConfig({
     defaultLocale: 'en-US',
   },
   images: {
-    domains: [process.env.HOST_DOMAIN]
+    //  domains: [process.env.HOST_DOMAIN],
   },
   rewrites() {
     return [

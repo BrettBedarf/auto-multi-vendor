@@ -1,12 +1,14 @@
 const fetch = require('sync-fetch')
 
-const channelUrl = process.env.NEXT_PUBLIC_VENDURE_CHANNEL_REST_URL;
+const channelUrl = process.env.VENDURE_CHANNEL_REST_URL
 
 if (!channelUrl) {
-  throw new Error('Missing NEXT_PUBLIC_VENDURE_CHANNEL_REST_URL environment variable. Needed to load color theme')
+  throw new Error(
+    'Missing VENDURE_CHANNEL_REST_URL environment variable. Needed to load color theme'
+  )
 }
 
-const channelData = fetch(process.env.NEXT_PUBLIC_VENDURE_CHANNEL_REST_URL, {
+const channelData = fetch(channelUrl, {
   method: 'get',
 }).json()
 
