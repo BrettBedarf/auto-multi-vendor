@@ -165,6 +165,7 @@ export const config: VendureConfig = {
 				outputPath: path.join(__dirname, '../admin-ui'),
 				extensions: [ExamplePlugin.uiExtensions],
 				devMode: true,
+				additionalProcessArguments: ['--disable-host-check'], // turn this off for production
 			}),
 		}),
 		ExamplePlugin.init({}),
