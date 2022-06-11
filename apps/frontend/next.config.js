@@ -8,6 +8,8 @@ const isSaleor = provider === '@vercel/commerce-saleor'
 const isSwell = provider === '@vercel/commerce-swell'
 const isVendure = provider === '@vercel/commerce-vendure'
 
+const imageDomains = process.env.IMAGE_DOMAINS
+const imageDomainsAsArr = imageDomains ? imageDomains.split(',') : []
 module.exports = withCommerceConfig({
   commerce,
   i18n: {
@@ -15,7 +17,7 @@ module.exports = withCommerceConfig({
     defaultLocale: 'en-US',
   },
   images: {
-    //  domains: [process.env.HOST_DOMAIN],
+    domains: imageDomainsAsArr,
   },
   rewrites() {
     return [
