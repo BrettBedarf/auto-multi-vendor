@@ -37,6 +37,10 @@ export class MultiStore implements OnApplicationBootstrap {
 				if (!channelRestUrl) {
 					throw new Error('VENDURE_CHANNEL_REST_URL environment variable! Cannot create new frontend deployment without it')
 				}
+				const imageDomains = process.env.IMAGE_DOMAINS
+				if (!imageDomains) {
+					throw new Error('Missing IMAGE_DOMAINS environment variable! Needed to tell nextjs which domains have images.')
+				}
 
 				const deployResult = await deploy({
 					storeName: event.entity.code,
@@ -45,8 +49,8 @@ export class MultiStore implements OnApplicationBootstrap {
 					apiUrl,
 					gitRepo,
 					channelRestUrl,
+					imageDomains
 				});
-				console.log(deployResult);
 			});
 	}
 }

@@ -8,6 +8,7 @@ type DeployInput = {
 	apiUrl: string;
 	gitRepo: string;
 	channelRestUrl: string;
+	imageDomains:string;
 };
 export const deploy = async ({
 	storeName,
@@ -16,6 +17,7 @@ export const deploy = async ({
 	apiUrl,
 	gitRepo,
 	channelRestUrl,
+	imageDomains
 }: DeployInput): Promise<any> => {
 	const ax = axios.create({
 		baseURL: 'https://api.vercel.com',
@@ -57,6 +59,12 @@ export const deploy = async ({
 				type: 'plain',
 				key: 'VENDURE_CHANNEL_REST_URL',
 				value: channelRestUrl,
+				target: 'production',
+			},
+			{
+				type: 'plain',
+				key: 'IMAGE_DOMAINS',
+				value: imageDomains,
 				target: 'production',
 			},
 		],
