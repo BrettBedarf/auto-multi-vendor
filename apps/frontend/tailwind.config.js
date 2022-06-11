@@ -12,10 +12,14 @@ const channelData = fetch(channelUrl, {
   method: 'get',
 }).json()
 
-console.log(`TAILWIND CHANNEL DATA`, channelData)
+
 const channel = channelData.find((c) => {
   return c.token === process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN
 })
+
+if (!channel) {
+  throw new Error(`Can't find channel data for channel ${process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN}`)
+}
 
 const {
   customFields: { primaryColor, secondaryColor },
