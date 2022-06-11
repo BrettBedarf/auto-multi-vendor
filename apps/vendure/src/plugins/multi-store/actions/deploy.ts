@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { DeployResponse, GithubLink, ProjectResponse } from './vercel.types';
 
 type DeployInput = {
 	storeName: string;
@@ -61,9 +62,43 @@ export const deploy = async ({
 		],
 	};
 	try {
-		const { data } = await ax.post('/v9/projects', vercelProjectInput);
+		const { data: projectRespData } = await ax.post<
+			ProjectResponse<GithubLink>
+		>('/v9/projects', vercelProjectInput);
 
-		console.log(data);
+		const { name, id: projectId, link } = projectRespData;
+		const repoId = link?.repoId;
+		if (!repoId) {
+			throw new Error(
+				'Could not find repoId. Needed to create deployment'
+			);
+		}
+		const { data: deployRespData } = await ax.post<DeployResponse>(
+			'/v13/deployments',
+			{
+				name,
+				source: 'import',
+				target: 'production',
+				gitSource: {
+					type: 'github',
+					repoId,
+					ref: 'main',
+				},
+			}
+		);
+
+		const { readyState, id: deployId, url } = deployRespData;
+		// check if deploy has error
+		if (readyState === 'ERROR') {
+			console.error('Deploy to vercel error state');
+			return {
+				success: false,
+			};
+		}
+
+		console.log('Ready state: ', readyState);
+		console.log('Deploy id: ', deployId);
+		console.log('Deploy url: ', url);
 
 		return { success: true };
 	} catch (err) {
