@@ -12,7 +12,6 @@ const channelData = fetch(channelUrl, {
   method: 'get',
 }).json()
 
-
 const channel = channelData.find((c) => {
   return c.token === process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN
 })
