@@ -10,6 +10,8 @@ const isVendure = provider === '@vercel/commerce-vendure'
 
 const imageDomains = process.env.IMAGE_DOMAINS
 const imageDomainsAsArr = imageDomains ? imageDomains.split(',') : []
+
+console.log('image domains: ',imageDomainsAsArr)
 module.exports = withCommerceConfig({
   commerce,
   i18n: {
