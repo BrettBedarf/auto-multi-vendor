@@ -8,11 +8,15 @@ import { Github, Vercel } from '@components/icons'
 import { Logo, Container } from '@components/ui'
 import { I18nWidget } from '@components/common'
 import s from './Footer.module.css'
+import { ChannelLogo } from '@lib/api/channel.types'
+import Title from '../Title/Title'
 
 interface Props {
   className?: string
   children?: any
   pages?: Page[]
+  storeName: string
+  logo?: ChannelLogo
 }
 
 const links = [
@@ -22,7 +26,7 @@ const links = [
   },
 ]
 
-const Footer: FC<Props> = ({ className, pages }) => {
+const Footer: FC<Props> = ({ className, pages, storeName, logo }) => {
   const { sitePages } = usePages(pages)
   const rootClassName = cn(s.root, className)
 
@@ -33,10 +37,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
           <div className="col-span-1 lg:col-span-2">
             <Link href="/">
               <a className="flex flex-initial items-center font-bold md:mr-24">
-                <span className="rounded-full border border-accent-6 mr-2">
-                  <Logo />
-                </span>
-                <span>ACME</span>
+                <Title storeName={storeName} logo={logo} />
               </a>
             </Link>
           </div>
@@ -68,22 +69,7 @@ const Footer: FC<Props> = ({ className, pages }) => {
         </div>
         <div className="pt-6 pb-10 flex flex-col md:flex-row justify-between items-center space-y-4 text-accent-6 text-sm">
           <div>
-            <span>&copy; 2020 ACME, Inc. All rights reserved.</span>
-          </div>
-          <div className="flex items-center text-primary text-sm">
-            <span className="text-primary">Created by</span>
-            <a
-              rel="noopener noreferrer"
-              href="https://vercel.com"
-              aria-label="Vercel.com Link"
-              target="_blank"
-              className="text-primary"
-            >
-              <Vercel
-                className="inline-block h-6 ml-3 text-primary"
-                alt="Vercel.com Logo"
-              />
-            </a>
+            <span>&copy; 2020 {storeName}, Inc. All rights reserved.</span>
           </div>
         </div>
       </Container>

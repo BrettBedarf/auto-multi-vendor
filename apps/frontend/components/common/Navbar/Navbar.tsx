@@ -4,6 +4,8 @@ import s from './Navbar.module.css'
 import NavbarRoot from './NavbarRoot'
 import { Logo, Container } from '@components/ui'
 import { Searchbar, UserNav } from '@components/common'
+import { ChannelLogo } from '@lib/api/channel.types'
+import Title from '../Title/Title'
 
 interface Link {
   href: string
@@ -12,16 +14,18 @@ interface Link {
 
 interface NavbarProps {
   links?: Link[]
+  storeName?: string | null
+  logo?: ChannelLogo
 }
 
-const Navbar: FC<NavbarProps> = ({ links }) => (
+const Navbar: FC<NavbarProps> = ({ links, storeName, logo }) => (
   <NavbarRoot>
     <Container clean className="mx-auto max-w-8xl px-6">
       <div className={s.nav}>
         <div className="flex items-center flex-1">
           <Link href="/">
-            <a className={s.logo} aria-label="Logo">
-              <Logo />
+            <a className="flex flex-initial items-center font-bold md:mr-24">
+              <Title storeName={storeName} logo={logo} />
             </a>
           </Link>
           <nav className={s.navMenu}>

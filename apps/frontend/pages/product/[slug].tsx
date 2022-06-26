@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import commerce from '@lib/api/commerce'
 import { Layout } from '@components/common'
 import { ProductView } from '@components/product'
+import { getChannel } from '@lib/api/channel'
 export async function getStaticProps({
   params,
   locale,
@@ -29,6 +30,8 @@ export async function getStaticProps({
     config,
     preview,
   })
+  const channelPromise = getChannel()
+  const channel = await channelPromise
   const { pages } = await pagesPromise
   const { categories } = await siteInfoPromise
   const { product } = await productPromise
@@ -44,6 +47,7 @@ export async function getStaticProps({
       product,
       relatedProducts,
       categories,
+      channel,
     },
     revalidate: 200,
   }

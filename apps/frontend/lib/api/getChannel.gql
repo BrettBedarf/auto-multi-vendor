@@ -1,0 +1,11 @@
+query {
+  activeChannel {
+    customFields {
+      displayName
+      logo {
+        source
+        preview
+      }
+    }
+  }
+}

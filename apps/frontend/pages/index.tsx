@@ -4,6 +4,7 @@ import { ProductCard } from '@components/product'
 import { Grid, Marquee, Hero } from '@components/ui'
 // import HomeAllProductsGrid from '@components/common/HomeAllProductsGrid'
 import type { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
+import { getChannel } from '../lib/api/channel'
 
 export async function getStaticProps({
   preview,
@@ -20,6 +21,8 @@ export async function getStaticProps({
   })
   const pagesPromise = commerce.getAllPages({ config, preview })
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
+  const channelPromise = getChannel()
+  const channel = await channelPromise
   const { products } = await productsPromise
   const { pages } = await pagesPromise
   const { categories, brands } = await siteInfoPromise
@@ -30,8 +33,9 @@ export async function getStaticProps({
       categories,
       brands,
       pages,
+      channel,
     },
-    revalidate: 60,
+    revalidate: 1,
   }
 }
 

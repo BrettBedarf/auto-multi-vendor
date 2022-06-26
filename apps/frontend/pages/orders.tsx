@@ -3,6 +3,7 @@ import commerce from '@lib/api/commerce'
 import { Bag } from '@components/icons'
 import { Layout } from '@components/common'
 import { Container, Text } from '@components/ui'
+import { getChannel } from '@lib/api/channel'
 
 export async function getStaticProps({
   preview,
@@ -12,6 +13,9 @@ export async function getStaticProps({
   const config = { locale, locales }
   const pagesPromise = commerce.getAllPages({ config, preview })
   const siteInfoPromise = commerce.getSiteInfo({ config, preview })
+  const channelPromise = getChannel()
+  const channel = await channelPromise
+
   const { pages } = await pagesPromise
   const { categories } = await siteInfoPromise
 

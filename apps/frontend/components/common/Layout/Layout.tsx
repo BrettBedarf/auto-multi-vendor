@@ -17,6 +17,7 @@ import { MenuSidebarView } from '@components/common/UserNav'
 import type { Page } from '@commerce/types/page'
 import type { Category } from '@commerce/types/site'
 import type { Link as LinkProps } from '../UserNav/MenuSidebarView'
+import { Channel } from '../../../lib/api/channel.types'
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -52,6 +53,7 @@ interface Props {
   pageProps: {
     pages?: Page[]
     categories: Category[]
+    channel: Channel
   }
 }
 
@@ -116,9 +118,17 @@ const Layout: React.FC<Props> = ({
   return (
     <CommerceProvider locale={locale}>
       <div className={cn(s.root)}>
-        <Navbar links={navBarlinks} />
+        <Navbar
+          links={navBarlinks}
+          storeName={pageProps?.channel?.displayName ?? ''}
+          logo={pageProps?.channel?.logo}
+        />
         <main className="fit">{children}</main>
-        <Footer pages={pageProps.pages} />
+        <Footer
+          pages={pageProps.pages}
+          storeName={pageProps?.channel?.displayName ?? ''}
+          logo={pageProps?.channel?.logo}
+        />
         <ModalUI />
         <CheckoutProvider>
           <SidebarUI links={navBarlinks} />
