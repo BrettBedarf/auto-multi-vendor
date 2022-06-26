@@ -1,14 +1,19 @@
 import axios from 'axios';
-import { DeployResponse, GithubLink, ProjectResponse } from './vercel.types';
+import {
+	DeployResponse,
+	DomainResponse,
+	GithubLink,
+	ProjectResponse,
+} from './vercel.types';
 
-type DeployInput = {
+export type DeployInput = {
 	storeName: string;
 	subdomain: string;
 	channelToken: string;
 	apiUrl: string;
 	gitRepo: string;
 	channelRestUrl: string;
-	imageDomains:string;
+	imageDomains: string;
 };
 export const deploy = async ({
 	storeName,
@@ -17,7 +22,7 @@ export const deploy = async ({
 	apiUrl,
 	gitRepo,
 	channelRestUrl,
-	imageDomains
+	imageDomains,
 }: DeployInput): Promise<any> => {
 	const ax = axios.create({
 		baseURL: 'https://api.vercel.com',
@@ -81,6 +86,23 @@ export const deploy = async ({
 				'Could not find repoId. Needed to create deployment'
 			);
 		}
+
+		// asign new domain to project
+		const domain = `multi-${subdomain}.vercel.app`;
+		const assignDomainResp = await ax.post<DomainResponse>(
+			`/v9/projects/${projectId}/domains`,
+			{
+				gitBranch: null,
+				name: domain,
+				redirect: null,
+				redirectStatusCode: null,
+			}
+		);
+
+		// assume good response
+		// TODO: this creates a second domain but doesn't delete the first
+		// we should get the original domain
+
 		const { data: deployRespData } = await ax.post<DeployResponse>(
 			'/v13/deployments',
 			{
