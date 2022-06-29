@@ -24,7 +24,7 @@ export const getChannel = async () => {
     query,
     {},
     {
-      'vendure-token': 'v42hbha5v2y3mu2ygzu',
+      'vendure-token': `${process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN}`,
     }
   )
   const {
