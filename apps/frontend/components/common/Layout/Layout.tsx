@@ -54,6 +54,7 @@ interface Props {
     pages?: Page[]
     categories: Category[]
     channel: Channel
+    channelToken: string
   }
 }
 
@@ -119,6 +120,7 @@ const Layout: React.FC<Props> = ({
     <CommerceProvider locale={locale}>
       <div className={cn(s.root)}>
         <Navbar
+          channelToken={pageProps.channelToken}
           links={navBarlinks}
           storeName={pageProps?.channel?.displayName ?? ''}
           logo={pageProps?.channel?.logo}

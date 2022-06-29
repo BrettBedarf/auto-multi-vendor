@@ -34,6 +34,7 @@ export async function getStaticProps({
       brands,
       pages,
       channel,
+      channelToken: process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN,
     },
     revalidate: 1,
   }
