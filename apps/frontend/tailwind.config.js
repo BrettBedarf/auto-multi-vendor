@@ -16,8 +16,12 @@ const channel = channelData.find((c) => {
   return c.token === process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN
 })
 
+console.log('channel data: ', channel)
+
 if (!channel) {
-  throw new Error(`Can't find channel data for channel ${process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN}`)
+  throw new Error(
+    `Can't find channel data for channel ${process.env.NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN}`
+  )
 }
 
 const {
