@@ -16,17 +16,16 @@ interface NavbarProps {
   links?: Link[]
   storeName?: string | null
   logo?: ChannelLogo
-  channelToken: string
 }
 
-const Navbar: FC<NavbarProps> = ({ links, storeName, logo, channelToken }) => (
+const Navbar: FC<NavbarProps> = ({ links, storeName, logo }) => (
   <NavbarRoot>
     <Container clean className="mx-auto max-w-8xl px-6">
       <div className={s.nav}>
         <div className="flex items-center flex-1">
           <Link href="/">
             <a className="flex flex-initial items-center font-bold md:mr-24">
-              <Title storeName={`${storeName}-${channelToken}`} logo={logo} />
+              <Title storeName={`${storeName}`} logo={logo} />
             </a>
           </Link>
           <nav className={s.navMenu}>

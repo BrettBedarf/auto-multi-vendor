@@ -18,6 +18,7 @@ import type { Page } from '@commerce/types/page'
 import type { Category } from '@commerce/types/site'
 import type { Link as LinkProps } from '../UserNav/MenuSidebarView'
 import { Channel } from '../../../lib/api/channel.types'
+import NavbarRoot from '../Navbar/NavbarRoot'
 
 const Loading = () => (
   <div className="w-80 h-80 flex items-center text-center justify-center p-3">
@@ -119,8 +120,7 @@ const Layout: React.FC<Props> = ({
   return (
     <CommerceProvider locale={locale}>
       <div className={cn(s.root)}>
-        <Navbar
-          channelToken={pageProps.channelToken}
+        <NavbarRoot
           links={navBarlinks}
           storeName={pageProps?.channel?.displayName ?? ''}
           logo={pageProps?.channel?.logo}
