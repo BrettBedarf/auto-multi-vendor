@@ -6,7 +6,8 @@
 // 	import('dotenv/config');
 // }
 
-import('dotenv/config');
+// import('dotenv/config');
+require('dotenv').config({debug:true})
 
 import { bootstrap } from '@vendure/core';
 import { config } from './vendure-config';

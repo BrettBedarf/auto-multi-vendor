@@ -137,6 +137,7 @@ export const config: VendureConfig = {
 		AssetServerPlugin.init({
 			route: 'assets',
 			assetUploadDir: path.join(__dirname, '../static/assets'),
+			assetUrlPrefix:process.env.ASSET_URL_PREFIX
 		}),
 		DefaultJobQueuePlugin.init({ useDatabaseForBuffer: true }),
 		DefaultSearchPlugin.init({
