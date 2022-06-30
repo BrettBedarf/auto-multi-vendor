@@ -11,7 +11,8 @@
             "$NEXT_PUBLIC_VENDURE_SHOP_API_URL",
             "$VENDURE_CHANNEL_REST_URL",
             "$NEXT_PUBLIC_VENDURE_CHANNEL_TOKEN",
-            "$IMAGE_DOMAINS"
+            "$IMAGE_DOMAINS",
+            "$ASSET_URL_PREFIX"
          ],
          "outputs": [
             ".next/**"
